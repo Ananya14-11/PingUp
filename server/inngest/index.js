@@ -112,7 +112,7 @@ const sendNewConnectionRequestReminder= inngest.createFunction({
 //Inngest Function to delete story after 24 hours
 const deleteStory=inngest.createFunction({
   id:'story-delete',
-  triggers:[{events:'app/story.delete'}],
+  triggers:[{event:'app/story.delete'}],
 },
   async(event,step)=>{
     const {storyId}=event.data;
