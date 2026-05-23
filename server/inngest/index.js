@@ -64,7 +64,7 @@ const sendNewConnectionRequestReminder= inngest.createFunction({
   id:"send-new-connection-request-reminder",
   triggers: [{event: "app/connection-request"}],
 },
-  async(event,step)=>{
+  async({event,step})=>{
     const {connectionId}=event.data;
     await step.run('send-connection-request-mail', async()=>{
       const connection=await Connection.findById(connectionId).populate('from_user_id to_user_id');
@@ -114,7 +114,7 @@ const deleteStory=inngest.createFunction({
   id:'story-delete',
   triggers:[{event:'app/story.delete'}],
 },
-  async(event,step)=>{
+  async({event,step})=>{
     const {storyId}=event.data;
     const in24Hours=new Date(Date.now()+24*60*60*1000)
     await step.sleepUntil('wait-for-24-hours',in24Hours)
